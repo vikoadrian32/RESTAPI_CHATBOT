@@ -3,8 +3,7 @@ import Message from '#models/message'
 import Conversation from '#models/conversation'
 import axios from 'axios'
 import {v4 as uuidv4} from 'uuid'
-import HttpExceptionHandler from '../exceptions/handler.js'
-import { request } from 'http'
+import env from '../../start/env.js'
 export default class ChatbotController {
 
   async sendQuestion({request,response}:HttpContext){
@@ -27,7 +26,7 @@ export default class ChatbotController {
         })
 
         
-        const externalAPIResponse = await axios.post('https://api.majadigidev.jatimprov.go.id/api/external/chatbot/send-message',{
+        const externalAPIResponse = await axios.post(env.get('API_EXTERNAL'),{
           question : question,
           session_id : sessionID
         })
