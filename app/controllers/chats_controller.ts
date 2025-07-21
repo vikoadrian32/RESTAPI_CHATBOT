@@ -112,7 +112,7 @@ export default class ChatbotController {
       try {
         const deleted = await Conversation.query().where('session_id', params.id).delete()
 
-        if (deleted === 0) {
+        if (!deleted) {
           return response.notFound({ message: 'Conversation not found' })
         }
         return response.ok({ message: 'Conversation deleted successfully' })
