@@ -39,7 +39,7 @@ export default class ChatbotController {
           message: botReply
         })
 
-        const conversation = await Conversation.create({
+         await Conversation.create({
           sessionId: sessionID,
           messageId: userQuestion.id,
           lastMessage: botReply
@@ -63,7 +63,7 @@ export default class ChatbotController {
       }
   }
 
-  async getConversations({request,response}:HttpContext){
+  async getConversations({response}:HttpContext){
     const allConversations = await Message.query().preload('conversations',(query) =>{
       query.select('session_id','last_message','message_id')
     }).select('id','message')
